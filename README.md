@@ -1,1 +1,9 @@
-# JEWZ__jacobl143_ethans175_yinweiz_ziyadh2
+# Stonks by JEWZ
+
+## Roster:
+- Project Manager | Jacob Lukose
+- Ethan Sie
+- Yinwei Zhang
+- Ziyad Hamed
+
+## Site Description:
