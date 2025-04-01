@@ -1,0 +1,2 @@
+jacobL -- 2025-04-01 07:00
+* Updated design doc - Descriptions and goals are clearly set.
