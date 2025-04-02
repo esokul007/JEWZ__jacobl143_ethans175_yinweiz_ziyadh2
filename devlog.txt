@@ -1,2 +1,9 @@
 jacobL -- 2025-04-01 07:00
 * Updated design doc - Descriptions and goals are clearly set.
+
+ethanS -- 2025-04-01 11:01
+* Added the rest of the required files and directories
+* Worked on setting up a server on JEWZ droplet
+
+ethanS -- 2025-04-01 23:43
+* Updated requirements.txt
