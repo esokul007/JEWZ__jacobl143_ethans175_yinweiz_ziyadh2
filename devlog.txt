@@ -13,3 +13,6 @@ ethanS -- 2025-04-02 07:57
 
 ethanS -- 2025-04-02 08:41
 * Adding a working app but need to autoboot it
+
+ethanS -- 2025-04-03 08:01
+* Added some basic routing and templating for the home page
