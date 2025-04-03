@@ -11,6 +11,7 @@ import sqlite3
 import sys
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 import json
+import pandas as pd
 
 DB_FILE = "db.py"
 app = Flask(__name__)
@@ -19,6 +20,17 @@ anchor = False
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    stocks = pd.read_csv('csv/sp500_stocks.csv')
+    index = pd.read_csv('csv/sp500_index.csv')
+    companies = pd.read_csv('csv/sp500_companies.csv')
+
+    print(index)
+    dates = index['Date'].tolist()
+    sp = index['S&P500'].tolist()
+
+    print(dates)
+    print(sp)
+    
     return render_template("home.html")
 
 @app.route('/register', methods=['GET','POST'])
