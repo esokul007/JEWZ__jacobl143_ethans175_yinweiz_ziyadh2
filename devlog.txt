@@ -20,3 +20,7 @@ ethanS -- 2025-04-03 08:01
 ethanS -- 2025-04-03 10:59
 * Added some javascript to test graph visualization
 * Added some pandas for data manipulation
+
+ethanS -- 2025-04-03 12:12
+* Base graph displays on html home website
+* BUGGED. Doesn't display any actual numbers

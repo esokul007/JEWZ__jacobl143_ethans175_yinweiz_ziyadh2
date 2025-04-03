@@ -18,10 +18,10 @@ var data2 = [1,2,3,5,67,87,6543,2,36,7];
 var options = {
     series: [{
         name: 'Flies',
-        data: data1
+        data: [1,2,3,5,67,87,6543,2,36,7]
     }, {
         name: 'Spiders',
-        data: data2
+        data: [1,2,3,5,67,87,6543,2,36,7]
     }],
     chart: {
         id: 'chart2',
@@ -105,10 +105,10 @@ chart.render();
 var optionsLine = {
     series: [{
         name: 'Flies',
-        data: data1
+        data: [1,2,3,5,67,87,6543,2,36,7]
     }, {
         name: 'Spiders',
-        data: data2
+        data: [1,2,3,5,67,87,6543,2,36,7]
     }],
     chart: {
         id: 'chart1',
@@ -153,4 +153,65 @@ var optionsLine = {
 var chartLine = new ApexCharts(document.querySelector("#chart-line"), optionsLine);
 chartLine.render();
 
-console.log('JavaScript is running');
+var options2 = {
+          series: [{
+          name: 'XYZ MOTORS',
+          data: dates
+        }],
+          chart: {
+          type: 'area',
+          stacked: false,
+          height: 350,
+          zoom: {
+            type: 'x',
+            enabled: true,
+            autoScaleYaxis: true
+          },
+          toolbar: {
+            autoSelected: 'zoom'
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        markers: {
+          size: 0,
+        },
+        title: {
+          text: 'Stock Price Movement',
+          align: 'left'
+        },
+        fill: {
+          type: 'gradient',
+          gradient: {
+            shadeIntensity: 1,
+            inverseColors: false,
+            opacityFrom: 0.5,
+            opacityTo: 0,
+            stops: [0, 90, 100]
+          },
+        },
+        yaxis: {
+          labels: {
+            formatter: function (val) {
+              return (val / 1000000).toFixed(0);
+            },
+          },
+          title: {
+            text: 'Price'
+          },
+        },
+        xaxis: {
+          type: 'datetime',
+        },
+        tooltip: {
+          shared: false,
+          y: {
+            formatter: function (val) {
+              return (val / 1000000).toFixed(0)
+            }
+          }
+        }
+        };
+var chart = new ApexCharts(document.querySelector("#chart"), options2);
+chart.render();
