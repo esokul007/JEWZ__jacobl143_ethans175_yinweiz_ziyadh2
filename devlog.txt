@@ -16,3 +16,7 @@ ethanS -- 2025-04-02 08:41
 
 ethanS -- 2025-04-03 08:01
 * Added some basic routing and templating for the home page
+
+ethanS -- 2025-04-03 10:59
+* Added some javascript to test graph visualization
+* Added some pandas for data manipulation
