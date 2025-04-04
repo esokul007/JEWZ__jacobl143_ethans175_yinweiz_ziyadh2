@@ -18,10 +18,10 @@ var data2 = [1,2,3,5,67,87,6543,2,36,7];
 var options = {
     series: [{
         name: 'Flies',
-        data: [1,2,3,5,67,87,6543,2,36,7]
+        data: data1
     }, {
         name: 'Spiders',
-        data: [1,2,3,5,67,87,6543,2,36,7]
+        data: data2
     }],
     chart: {
         id: 'chart2',
@@ -105,10 +105,10 @@ chart.render();
 var optionsLine = {
     series: [{
         name: 'Flies',
-        data: [1,2,3,5,67,87,6543,2,36,7]
+        data: data1
     }, {
         name: 'Spiders',
-        data: [1,2,3,5,67,87,6543,2,36,7]
+        data: data2
     }],
     chart: {
         id: 'chart1',
