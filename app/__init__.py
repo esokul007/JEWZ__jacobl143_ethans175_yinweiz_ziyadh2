@@ -20,12 +20,15 @@ anchor = False
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    stocks = pd.read_csv('csv/sp500_stocks.csv')
     index = pd.read_csv('csv/sp500_index.csv')
     companies = pd.read_csv('csv/sp500_companies.csv')
 
     dates = index['Date'].tolist()
     sp = index['S&P500'].tolist()
+    # Exchange,Symbol,Shortname,Longname,Sector,Industry,Currentprice,Marketcap,Ebitda,Revenuegrowth,City,State,Country,
+    print(companies['Shortname'])
+    print(companies.nlargest(10, 'Currentprice'))
+
 
     return render_template("home.html", data1=dates, data2=sp)
 
