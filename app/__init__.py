@@ -24,14 +24,10 @@ def home():
     index = pd.read_csv('csv/sp500_index.csv')
     companies = pd.read_csv('csv/sp500_companies.csv')
 
-    print(index)
     dates = index['Date'].tolist()
     sp = index['S&P500'].tolist()
 
-    print(dates)
-    print(sp)
-    
-    return render_template("home.html")
+    return render_template("home.html", data1=dates, data2=sp)
 
 @app.route('/register', methods=['GET','POST'])
 def register():

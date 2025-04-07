@@ -26,8 +26,7 @@
 
    <!-- Main Content -->
    <main>
-     <div id="chart-line2"></div>
-     <div id="chart-line"></div>
+     <div id="chart"></div>
 
       <div class="min-h-screen flex items-center justify-center bg-gray-200 p-8">
          <div class="text-center max-w-7xl w-full bg-gray-100 p-10 rounded-lg shadow-2xl">
@@ -116,7 +115,12 @@
    <footer class="bg-gray-300 p-4 text-center">
       <p class="text-gray-700 text-sm">&copy; 2025 Stocks. All rights reserved.</p>
    </footer>
-   <div id="chart"></div>
-   <script src="static/js/scripts.js"></script>
+
+   <script>
+   var data1 = {{ data1 | tojson }};
+   var data2 = {{ data2 | tojson }};
+   console.log(data1)
+   </script>
+  <script src="static/js/scripts.js"></script>
 </body>
 </html>
