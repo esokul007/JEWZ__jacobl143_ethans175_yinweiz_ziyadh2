@@ -45,3 +45,8 @@ ethanS -- 2025-04-08 10:59
 * Added each S&P 500 Stock with button redirect capabilities
 * Need to display passed in stock specific data now in th stock_list.html
 * ALL OTHER NEXT STEPS ALSO NEED TO BE DONE
+
+ethanS -- 2025-04-08 19:49
+* Individual Stock graphs work on the stock list page
+* Need to make this page look better and have more options for graph looking
+

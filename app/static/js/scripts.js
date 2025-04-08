@@ -12,7 +12,6 @@ function jump(h) {
     }
 }
 
-
 var options = {
   series: [{
     name: "Daily Stock Data",
@@ -32,7 +31,7 @@ stroke: {
   curve: 'straight'
 },
 title: {
-  text: 'S&P 500 over time',
+  text: stockName,
   align: 'left'
 },
 grid: {

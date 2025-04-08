@@ -20,66 +20,61 @@ app.secret_key = os.urandom(32)
 anchor = False
 
 if (not os.path.isfile("stock.db")):
-    db.setup() # sets up databases
+    db.setup()
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
     sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-
     stockNames = sp500Stocks['Name'].unique()
-
     passValue = 'username' in session
+
     if 'username' in session:
-        return render_template("home.html", logged_in = passValue, username=session['username'], stockNames = stockNames)
-    return render_template("home.html", logged_in = passValue)
-
-@app.route("/view_stock", methods=['GET','POST'])
-def view():
-    passValue = 'username' in session
-    stockName = request.form['stock']
-    sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-    index = pd.read_csv('csv/sp500_index.csv')
-    companies = pd.read_csv('csv/sp500_companies.csv')
-
-    dates = index['Date'].tolist()
-    sp = index['S&P500'].tolist()
-    stockDates = sp500Stocks[sp500Stocks['Name'] == stockName]['date'].tolist()
-    stockHigh = sp500Stocks[sp500Stocks['Name'] == stockName]['high'].tolist()
-
-    sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-    stockNames = sp500Stocks['Name'].unique()
-    if 'username' in session:
-        return render_template("stock_list.html", logged_in = passValue, data1=dates, data2=sp, username = session['username'], stockNames = stockNames, stockDates = stockDates, stockHigh = stockHigh)
-    return render_template("stock_list.html", data1=dates, data2=sp, stockNames = stockNames, stockDates = stockDates, stockHigh = stockHigh)
+        return render_template("home.html", logged_in=passValue, username=session['username'], stockNames=stockNames)
+    return render_template("home.html", logged_in=passValue)
 
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
     passValue = 'username' in session
-    return render_template("portfolio.html", logged_in = passValue)
+    return render_template("portfolio.html", logged_in=passValue)
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():
     passValue = 'username' in session
-    return render_template("battle.html", logged_in = passValue)
+    return render_template("battle.html", logged_in=passValue)
 
 @app.route("/stock_list", methods=['GET', 'POST'])
 def list():
+    global triggerView
+    triggerView = False
+    if request.form.get('trigger') == "True":
+        triggerView = True
+    else:
+        triggerView = False
+    stockName = request.form.get('stock')
+
     passValue = 'username' in session
     index = pd.read_csv('csv/sp500_index.csv')
-    companies = pd.read_csv('csv/sp500_companies.csv')
 
     dates = index['Date'].tolist()
     sp = index['S&P500'].tolist()
-    # # Exchange,Symbol,Shortname,Longname,Sector,Industry,Currentprice,Marketcap,Ebitda,Revenuegrowth,City,State,Country,
-    # print(companies['Shortname'])
-    # print(companies.nlargest(10, 'Currentprice'))
-
     sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-    stockNames = sp500Stocks['Name'].unique()
+    names = sp500Stocks['Name'].unique()
 
-    return render_template("stock_list.html", data1=dates, data2=sp, logged_in = passValue, stockNames = stockNames)
+    stockDates = sp500Stocks[sp500Stocks['Name'] == stockName]['date'].tolist()
+    stockHighs = sp500Stocks[sp500Stocks['Name'] == stockName]['high'].tolist()
+    print(triggerView)
+    print(stockName)
+    return render_template(
+        "stock_list.html",
+        logged_in=passValue,
+        stockNames=names,
+        stock = stockName,
+        stockDates=stockDates,
+        stockHigh=stockHighs,
+        view = triggerView
+    )
 
-@app.route('/register', methods=['GET','POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
     if not request.form:
         flash("You must use the menu to register", 'error')
@@ -96,7 +91,7 @@ def register():
             return redirect("/")
         else:
             session['username'] = username
-            flash("Registered Sucessfully!", "success")
+            flash("Registered Successfully!", "success")
             db.addUser(username, password)
             return redirect("/")
 

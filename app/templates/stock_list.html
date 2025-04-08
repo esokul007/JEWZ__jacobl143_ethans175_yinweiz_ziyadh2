@@ -26,22 +26,36 @@
 
    <!-- Main Content -->
    <main>
-   <div id="chart"></div>
-
    <div class="grid grid-cols-4 gap-4">
      {% for stock in stockNames %}
      <div>
-<form action="/view_stock" method="POST" class="space-y-4">
+<form action="/stock_list" method="POST" class="space-y-4">
     <input type="hidden" name="stock" value="{{ stock }}">
-    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">{{ stock }}</button>
+    <input type="hidden" name="trigger" value="True">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
+    {{ stock }}
+</button>
 </form>
 </div>
      {% endfor %}
   </div>
 
-   </main>
+   {% if view %}
+   <div class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+      <div class="bg-gray-300 p-6 rounded shadow-lg w-3/4 h-2/3">
+         <h3 class="text-2xl font-bold mb-4">View Stocks</h3>
+         <div id="chart"></div>
+         <div class="flex justify-between items-center">
+           <form action="/stock_list" method="POST" class="space-y-4">
+            <input type="hidden" name="trigger" value="False">
+            <button type="submit" class="text-gray-600 hover:text-black">Cancel</button>
+          </form>
+         </div>
+      </div>
+   </div>
+   {% endif %}
 
-
+ </main>
    <!-- Account Settings  -->
    <div id="settings" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
       <div class="bg-gray-300 p-6 rounded shadow-lg w-96">
@@ -65,8 +79,9 @@
    </footer>
 
    <script>
-   var data1 = {{ data1 | tojson }};
-   var data2 = {{ data2 | tojson }};
+        var data1 = {{ stockDates | tojson}};
+        var data2 = {{ stockHigh | tojson}};
+        var stockName = {{ stock }};
    </script>
 
   <script src="static/js/scripts.js"></script>
