@@ -40,3 +40,8 @@ ethanS -- 2025-04-07 23:53
 * Allow user search ups + privacy account settings - to allow for portfolio following
 * Include more interactivity with stock data display
 * Create better css to display interactive tabs for each stock
+
+ethanS -- 2025-04-08 10:59
+* Added each S&P 500 Stock with button redirect capabilities
+* Need to display passed in stock specific data now in th stock_list.html
+* ALL OTHER NEXT STEPS ALSO NEED TO BE DONE

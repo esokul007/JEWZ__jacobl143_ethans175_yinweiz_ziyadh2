@@ -35,13 +35,22 @@ def home():
 
 @app.route("/view_stock", methods=['GET','POST'])
 def view():
+    passValue = 'username' in session
     stockName = request.form['stock']
     sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
+    index = pd.read_csv('csv/sp500_index.csv')
+    companies = pd.read_csv('csv/sp500_companies.csv')
 
+    dates = index['Date'].tolist()
+    sp = index['S&P500'].tolist()
     stockDates = sp500Stocks[sp500Stocks['Name'] == stockName]['date'].tolist()
     stockHigh = sp500Stocks[sp500Stocks['Name'] == stockName]['high'].tolist()
 
-    return render_template("home.html", logged_in = 'username' in session, username = session['username'], stockDates = stockDates, stockHigh = stockHigh)
+    sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
+    stockNames = sp500Stocks['Name'].unique()
+    if 'username' in session:
+        return render_template("stock_list.html", logged_in = passValue, data1=dates, data2=sp, username = session['username'], stockNames = stockNames, stockDates = stockDates, stockHigh = stockHigh)
+    return render_template("stock_list.html", data1=dates, data2=sp, stockNames = stockNames, stockDates = stockDates, stockHigh = stockHigh)
 
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():

@@ -27,9 +27,15 @@
    <!-- Main Content -->
    <main>
    <div id="chart"></div>
+
    <div class="grid grid-cols-4 gap-4">
      {% for stock in stockNames %}
-         <div>{{ stock }}</div>
+     <div>
+<form action="/view_stock" method="POST" class="space-y-4">
+    <input type="hidden" name="stock" value="{{ stock }}">
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">{{ stock }}</button>
+</form>
+</div>
      {% endfor %}
   </div>
 
