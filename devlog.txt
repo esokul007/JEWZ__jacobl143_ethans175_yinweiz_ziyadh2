@@ -33,3 +33,10 @@ ethanS -- 2025-04-07 10:59
 ethanS -- 2025-04-07 21:06
 * Added more html templates for better organization
 * Reorganizing functionalities
+
+ethanS -- 2025-04-07 23:53
+* Added basic user login and register
+* Next steps: Find more data to create an almost registry of stocks
+* Allow user search ups + privacy account settings - to allow for portfolio following
+* Include more interactivity with stock data display
+* Create better css to display interactive tabs for each stock

@@ -24,6 +24,24 @@ if (not os.path.isfile("stock.db")):
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
+    passValue = 'username' in session
+    if 'username' in session:
+        return render_template("home.html", logged_in = passValue, username=session['username'])
+    return render_template("home.html", logged_in = passValue)
+
+@app.route("/portfolio", methods=['GET', 'POST'])
+def analysis():
+    passValue = 'username' in session
+    return render_template("portfolio.html", logged_in = passValue)
+
+@app.route("/battle", methods=['GET', 'POST'])
+def battle():
+    passValue = 'username' in session
+    return render_template("battle.html", logged_in = passValue)
+
+@app.route("/stock_list", methods=['GET', 'POST'])
+def list():
+    passValue = 'username' in session
     index = pd.read_csv('csv/sp500_index.csv')
     companies = pd.read_csv('csv/sp500_companies.csv')
 
@@ -33,20 +51,7 @@ def home():
     print(companies['Shortname'])
     print(companies.nlargest(10, 'Currentprice'))
 
-
-    return render_template("home.html", data1=dates, data2=sp)
-
-@app.route("/portfolios", methods=['GET', 'POST'])
-def analysis():
-    return render_template("portfolio.html")
-
-@app.route("/battle", methods=['GET', 'POST'])
-def battle():
-    return render_template("battle.html")
-
-@app.route("/stock_list", methods=['GET', 'POST'])
-def list():
-    return render_template("stock_list.html")
+    return render_template("stock_list.html", data1=dates, data2=sp, logged_in = passValue)
 
 @app.route('/register', methods=['GET','POST'])
 def register():
@@ -65,7 +70,6 @@ def register():
             return redirect("/")
         else:
             session['username'] = username
-            active_sessions[session['username']] = db.getUserID(session['username'])
             flash("Registered Sucessfully!", "success")
             db.addUser(username, password)
             return redirect("/")
@@ -78,11 +82,8 @@ def login():
     else:
         username = request.form['username']
         password = request.form['password']
-        if username in active_sessions:
-            flash("You already have an active session.", 'error')
-        elif db.getUserID(username) >= 0 and db.getTableData("users", "username", username)[2] == password:
+        if db.getUserID(username) >= 0 and db.getTableData("users", "username", username)[2] == password:
             session['username'] = username
-            active_sessions[session['username']] = db.getUserID(session['username'])
             db.updateLoginTime(session['username'])
             flash("Logged in", 'success')
         else:
@@ -93,6 +94,5 @@ def login():
 def logout():
     if 'username' in session:
         flash("Logged out", 'success')
-        active_sessions.pop(session['username'])
         session.pop('username', None)
     return redirect("/")
