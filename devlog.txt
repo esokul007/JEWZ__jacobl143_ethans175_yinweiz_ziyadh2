@@ -29,3 +29,7 @@ ethanS -- 2025-04-07 10:59
 * Base graph works. Turns out I was using the wrong graph
 * Did some more panda manipulation. Will add a page for filtering
 * Need to add more user functionality and restructure website
+
+ethanS -- 2025-04-07 21:06
+* Added more html templates for better organization
+* Reorganizing functionalities

@@ -15,7 +15,7 @@ function jump(h) {
 
 var options = {
   series: [{
-    name: "Stock Data",
+    name: "Daily Stock Data",
     data: data2
 }],
   chart: {

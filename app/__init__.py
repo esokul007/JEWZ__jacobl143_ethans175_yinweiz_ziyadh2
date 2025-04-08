@@ -12,11 +12,15 @@ import sys
 from flask import Flask, render_template, request, session, redirect, url_for, flash, jsonify
 import json
 import pandas as pd
+import db
 
 DB_FILE = "db.py"
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 anchor = False
+
+if (not os.path.isfile("stock.db")):
+    db.setup() # sets up databases
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
@@ -32,6 +36,18 @@ def home():
 
     return render_template("home.html", data1=dates, data2=sp)
 
+@app.route("/portfolios", methods=['GET', 'POST'])
+def analysis():
+    return render_template("portfolio.html")
+
+@app.route("/battle", methods=['GET', 'POST'])
+def battle():
+    return render_template("battle.html")
+
+@app.route("/stock_list", methods=['GET', 'POST'])
+def list():
+    return render_template("stock_list.html")
+
 @app.route('/register', methods=['GET','POST'])
 def register():
     if not request.form:
@@ -41,7 +57,6 @@ def register():
         username = request.form['username']
         password = request.form['password']
         password2 = request.form.get('password2')
-
         if password != password2:
             flash("Passwords do not match", 'error')
             return redirect("/")

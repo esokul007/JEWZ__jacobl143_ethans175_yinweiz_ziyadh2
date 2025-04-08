@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Stocks</title>
+   <script src="https://cdn.tailwindcss.com"></script>
+   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+   <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body class="bg-white text-black min-h-screen flex flex-col">
+
+   <!-- Header -->
+   <header class="bg-gray-300 p-4 shadow-md">
+      <div class="container mx-auto flex items-center justify-between">
+         <h1 class="text-xl font-bold"><a href="/"> Stocks </a> </h1>
+         <nav>
+            <a href="/" class="text-gray-700 hover:text-black px-4">Home</a>
+            <a href="/portfolios" class="text-gray-700 hover:text-black px-4">Stock Portfolios</a>
+            <a href="/stock_list" class="text-gray-700 hover:text-black px-4">Stock List</a>
+            <a href="/battle" class="text-gray-700 hover:text-black px-4">Stock Battle</a>
+            <button onclick="toggleHidden('settings')" class="text-gray-700 hover:text-black px-4">Account Settings</button>
+         </nav>
+      </div>
+   </header>
+
+   <!-- Main Content -->
+   <main>
+   dood odod od odd odo
+   </main>
+
+
+   <!-- Account Settings  -->
+   <div id="settings" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
+      <div class="bg-gray-300 p-6 rounded shadow-lg w-96">
+         <h3 class="text-2xl font-bold mb-4">Account Settings</h3>
+         {% if logged_in %}
+         <form action="/mode_swap" method="POST" class="space-y-4">
+            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">Swap Screen Color</button>
+         </form>
+         {% else %}
+         <h3 class="text-2xl font-bold mb-4">Log in first!</h3>
+         {% endif %}
+         <div class="flex justify-between items-center">
+            <button type="button" onclick="toggleHidden('settings')" class="text-gray-600 hover:text-black">Cancel</button>
+         </div>
+      </div>
+   </div>
+
+   <!-- Footer -->
+   <footer class="bg-gray-300 p-4 text-center">
+      <p class="text-gray-700 text-sm">&copy; 2025 Stocks. All rights reserved.</p>
+   </footer>
+
+</body>
+</html>
