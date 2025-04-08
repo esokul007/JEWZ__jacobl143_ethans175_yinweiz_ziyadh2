@@ -27,6 +27,12 @@
    <!-- Main Content -->
    <main>
    <div id="chart"></div>
+   <div class="grid grid-cols-4 gap-4">
+     {% for stock in stockNames %}
+         <div>{{ stock }}</div>
+     {% endfor %}
+  </div>
+
    </main>
 
 
