@@ -46,7 +46,65 @@
    par
    </main>
 
+   <!-- Register  -->
+   <div id="register" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
+      <div class="bg-gray-700 p-6 rounded shadow-lg w-1/2 h-1/2">
+         <h3 class="text-5xl font-bold mb-4">Register</h3>
+         <form action="/register" method="POST" class="space-y-4">
+            <div>
+               <label for="username" class="block text-sm font-medium text-gray-400">Username</label>
+               <input type="text" id="username" name="username" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+            </div>
+            <div>
+               <label for="password" class="block text-sm font-medium text-gray-400">Password</label>
+               <input type="password" id="password" name="password" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+            </div>
+            <div>
+               <label for="password2" class="block text-sm font-medium text-gray-400">Confirm Password</label>
+               <input type="password" id="password2" name="password2" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+            </div>
+            <div class="flex justify-between items-center">
+               <button type="submit" class="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded">Register</button>
+               <button type="button" onclick="toggleHidden('register')" class="text-gray-300 hover:text-black">Cancel</button>
+            </div>
+         </form>
+      </div>
+   </div>
+   <!-- Log In  -->
+   <div id="login" class="fixed inset-0 bg-black bg-opacity-30 hidden flex items-center justify-center">
+      <div class="bg-gray-700 p-6 rounded shadow-lg w-1/2 h-1/2">
+         <h3 class="mt-10 text-5xl font-bold mb-4">Login</h3>
+         <form action="/login" method="POST" class="space-y-4">
+            <div>
+               <label for="username" class="block text-sm font-medium text-gray-400">Username</label>
+               <input type="text" id="username" name="username" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+            </div>
+            <div>
+               <label for="password" class="block text-sm font-medium text-gray-400">Password</label>
+               <input type="password" id="password" name="password" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+            </div>
+            <div class="flex justify-between items-center">
+               <button type="submit" class="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded">Log In</button>
+               <button type="button" onclick="toggleHidden('login')" class="text-gray-300 hover:text-black">Cancel</button>
+            </div>
+         </form>
+      </div>
+   </div>
 
+   <!-- Flash messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 sm:w-1/2">
+         {% for category, message in messages %}
+         <div class="alert {{ category }} mb-4 p-4 rounded-lg shadow-lg opacity-100 transition-opacity duration-1000 animate-fade-out" id="flash-message">
+            <p class="font-semibold text-lg">
+               {{ message }}
+            </p>
+         </div>
+         {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
    <!-- Account Settings  -->
    <div id="settings" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
       <div class="bg-gray-300 p-6 rounded shadow-lg w-96">
