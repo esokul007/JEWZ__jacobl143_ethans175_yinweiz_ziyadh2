@@ -53,3 +53,5 @@ ethanS -- 2025-04-08 19:49
 ethanS -- 2025-04-08 22:56
 * Redoing CSS to make it better
 
+ethanS -- 2025-04-08 23:22
+* Getting a consistent CSS working
