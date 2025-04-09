@@ -8,7 +8,7 @@
    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
    <link rel="stylesheet" href="static/css/styles.css">
 </head>
-<body class="bg-white text-black min-h-screen flex flex-col">
+<body class="bg-gray-800 text-gray-300 min-h-screen flex flex-col">
 <!-- Header -->
 <header class="bg-gray-900 p-6 shadow-md fixed top-0 w-full">
   <!-- Header Section -->
@@ -23,7 +23,7 @@
     <div class="flex items-center space-x-5">
       <a href="/" class="text-lg text-gray-500 hover:text-gray-300">Home</a>
       <a href="/portfolio" class="text-lg text-gray-500 hover:text-gray-300">Stock Portfolios</a>
-      <a href="/stock_list" class="text-lg text-gray-500 hover:text-gray-300">Stock List</a>
+      <a href="/stock_list" class="text-lg text-gray-500 hover:text-gray-300">S&P 500 Stock Data</a>
       <a href="/battle" class="text-lg text-gray-500 hover:text-gray-300">Stock Battle</a>
       <button onclick="toggleHidden('settings')" class="text-lg text-gray-500 hover:text-gray-300">Account Settings</button>
     </div>
@@ -41,20 +41,20 @@
 </header>
 
    <!-- Main Content -->
-   <main>
-   <div class="grid grid-cols-4 gap-4">
-     {% for stock in stockNames %}
-     <div>
-<form action="/stock_list" method="POST" class="space-y-4">
-    <input type="hidden" name="stock" value="{{ stock }}">
-    <input type="hidden" name="trigger" value="True">
-    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded">
-    {{ stock }}
-</button>
-</form>
-</div>
-     {% endfor %}
-  </div>
+   <main class="mt-[130px]">
+     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+       {% for stock in stockNames %}
+         <div class="bg-gray-600 h-60 shadow-md rounded-lg p-4 flex flex-col items-center justify-center">
+           <form action="/stock_list" method="POST" class="space-y-4 w-full text-center">
+             <input type="hidden" name="stock" value="{{ stock }}">
+             <input type="hidden" name="trigger" value="True">
+             <button type="submit" class="text-6xl bg-gray-500 h-40 hover:bg-gray-400 text-white py-2 px-4 rounded w-full">
+               {{ stock }}
+             </button>
+           </form>
+         </div>
+       {% endfor %}
+     </div>
 
    {% if view %}
    <div class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
@@ -90,8 +90,8 @@
    </div>
 
    <!-- Footer -->
-   <footer class="bg-gray-300 p-4 text-center">
-      <p class="text-gray-700 text-sm">&copy; 2025 Stocks. All rights reserved.</p>
+   <footer class="fixed bottom-0 w-full bg-gray-800 p-4 text-center">
+      <p class="text-gray-300 text-sm mb-5">&copy; 2025 Stocks. All rights reserved.</p>
    </footer>
 
    <script>

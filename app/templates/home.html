@@ -8,7 +8,7 @@
       <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
       <link rel="stylesheet" href="static/css/styles.css">
    </head>
-   <body class="bg-white text-black min-h-screen flex flex-col">
+   <body class="bg-gray-800 text-gray-300 min-h-screen flex flex-col">
    <!-- Header -->
    <header class="bg-gray-900 p-6 shadow-md fixed top-0 w-full">
      <!-- Header Section -->
@@ -23,7 +23,7 @@
        <div class="flex items-center space-x-5">
          <a href="/" class="text-lg text-gray-500 hover:text-gray-300">Home</a>
          <a href="/portfolio" class="text-lg text-gray-500 hover:text-gray-300">Stock Portfolios</a>
-         <a href="/stock_list" class="text-lg text-gray-500 hover:text-gray-300">Stock List</a>
+         <a href="/stock_list" class="text-lg text-gray-500 hover:text-gray-300">S&P 500 Stock Data</a>
          <a href="/battle" class="text-lg text-gray-500 hover:text-gray-300">Stock Battle</a>
          <button onclick="toggleHidden('settings')" class="text-lg text-gray-500 hover:text-gray-300">Account Settings</button>
        </div>
@@ -43,7 +43,7 @@
       <!-- Main Content -->
       <main>
          <div class="min-h-screen flex items-center justify-center bg-gray-800 p-8">
-            <div class="text-center max-w-7xl w-full bg-gray-700 p-10 rounded-lg shadow-2xl">
+            <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
                <!-- Header -->
                <h2 class="text-9xl text-gray-300 mt-10 mb-5 tracking-wider">
                   Welcome to Tradesk
@@ -53,9 +53,7 @@
               </h3>
                <!-- User Greeting -->
                {% if logged_in %}
-               <p class="text-3xl text-gray-700 mb-4">Hi, {{username}}!</p>
-               {% else %}
-               <p class="text-3xl text-gray-700 mb-4">Hi!</p>
+               <p class="text-3xl text-gray-300 mb-4">Hi, {{username}}!</p>
                {% endif %}
 
             </div>
@@ -137,8 +135,8 @@
          </div>
       </div>
       <!-- Footer -->
-      <footer class="bg-gray-300 p-4 text-center">
-         <p class="text-gray-700 text-sm">&copy; 2025 Stocks. All rights reserved.</p>
+      <footer class="fixed bottom-0 w-full bg-gray-800 p-4 text-center">
+         <p class="text-gray-300 text-sm mb-5">&copy; 2025 Stocks. All rights reserved.</p>
       </footer>
 
    <script src="static/js/scripts.js"></script>
