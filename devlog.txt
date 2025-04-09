@@ -55,3 +55,7 @@ ethanS -- 2025-04-08 22:56
 
 ethanS -- 2025-04-08 23:22
 * Getting a consistent CSS working
+
+ethanS -- 2025-04-08 23:43
+* Finished standardizing current CSS
+* Note: Logging/Register redirects back to home (do we want to fix this???)
