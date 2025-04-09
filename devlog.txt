@@ -59,3 +59,7 @@ ethanS -- 2025-04-08 23:22
 ethanS -- 2025-04-08 23:43
 * Finished standardizing current CSS
 * Note: Logging/Register redirects back to home (do we want to fix this???)
+
+ethanS -- 2025-04-08 23:48
+* Fixed indenting in html files
+* Forgot to fix CSS in account settings (fixed that)
