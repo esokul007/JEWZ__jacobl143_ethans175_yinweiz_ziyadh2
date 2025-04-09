@@ -17,12 +17,23 @@ var options = {
     name: "Daily Stock Data",
     data: data2
 }],
-  chart: {
+chart: {
   height: 350,
   type: 'line',
   zoom: {
-    enabled: false
-  }
+    enabled: true,
+    type: 'x', // Enable zooming on the x-axis only
+    autoScaleYaxis: true, // Adjust y-axis automatically when zooming
+  },
+  toolbar: {
+    tools: {
+      zoom: true,
+      zoomin: true,
+      zoomout: true,
+      pan: true,
+      reset: true, // Add a reset zoom button
+    },
+  },
 },
 dataLabels: {
   enabled: false

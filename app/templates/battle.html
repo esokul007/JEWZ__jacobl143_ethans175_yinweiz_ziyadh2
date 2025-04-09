@@ -9,20 +9,36 @@
    <link rel="stylesheet" href="static/css/styles.css">
 </head>
 <body class="bg-white text-black min-h-screen flex flex-col">
+<!-- Header -->
+<header class="bg-gray-900 p-6 shadow-md fixed top-0 w-full">
+  <!-- Header Section -->
+  <div class="container mx-auto flex items-center justify-between">
+    <!-- Left Aligned Logo -->
+    <h1 class="text-3xl text-gray-300 font-bold"><a href="/">Tradesk</a></h1>
+  </div>
 
-   <!-- Header -->
-   <header class="bg-gray-300 p-4 shadow-md">
-      <div class="container mx-auto flex items-center justify-between">
-         <h1 class="text-xl font-bold"><a href="/"> Stocks </a> </h1>
-         <nav>
-            <a href="/" class="text-gray-700 hover:text-black px-4">Home</a>
-            <a href="/portfolio" class="text-gray-700 hover:text-black px-4">Stock Portfolios</a>
-            <a href="/stock_list" class="text-gray-700 hover:text-black px-4">Stock List</a>
-            <a href="/battle" class="text-gray-700 hover:text-black px-4">Stock Battle</a>
-            <button onclick="toggleHidden('settings')" class="text-gray-700 hover:text-black px-4">Account Settings</button>
-         </nav>
-      </div>
-   </header>
+  <!-- Navigation Section -->
+  <nav class="container mx-auto flex items-center justify-between mt-4">
+    <!-- Left Aligned Navigation Links -->
+    <div class="flex items-center space-x-5">
+      <a href="/" class="text-lg text-gray-500 hover:text-gray-300">Home</a>
+      <a href="/portfolio" class="text-lg text-gray-500 hover:text-gray-300">Stock Portfolios</a>
+      <a href="/stock_list" class="text-lg text-gray-500 hover:text-gray-300">Stock List</a>
+      <a href="/battle" class="text-lg text-gray-500 hover:text-gray-300">Stock Battle</a>
+      <button onclick="toggleHidden('settings')" class="text-lg text-gray-500 hover:text-gray-300">Account Settings</button>
+    </div>
+
+    <!-- Right Aligned Login/Register/Logout -->
+    <div class="flex items-center ml-auto space-x-5">
+      {% if not logged_in %}
+        <button onclick="toggleHidden('register')" class="text-lg text-gray-500 hover:text-gray-300">Register</button>
+        <button onclick="toggleHidden('login')" class="text-lg text-gray-500 hover:text-gray-300">Login</button>
+      {% else %}
+        <a href="/logout" class="text-lg text-gray-500 hover:text-gray-300">Logout</a>
+      {% endif %}
+    </div>
+  </nav>
+</header>
 
    <!-- Main Content -->
    <main>

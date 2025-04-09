@@ -50,3 +50,6 @@ ethanS -- 2025-04-08 19:49
 * Individual Stock graphs work on the stock list page
 * Need to make this page look better and have more options for graph looking
 
+ethanS -- 2025-04-08 22:56
+* Redoing CSS to make it better
+
