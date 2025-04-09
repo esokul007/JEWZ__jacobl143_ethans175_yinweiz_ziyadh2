@@ -8,11 +8,11 @@ def setup():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, created_at TEXT, last_login TEXT);")
-
-    c.execute("CREATE TABLE IF NOT EXISTS gameChallenge (challenge_ID INTEGER PRIMARY KEY AUTOINCREMENT, challenger TEXT, challenged TEXT, accepted_status TEXT);")
-    c.execute("CREATE TABLE IF NOT EXISTS gameHistory (game_ID INTEGER PRIMARY KEY, winner TEXT, loser TEXT);")
-    c.execute("CREATE TABLE IF NOT EXISTS gameTracker (game_ID INTEGER, player1 TEXT, player2 TEXT, move1 TEXT, move2 TEXT, turn INTEGER);")
-    c.execute("CREATE TABLE IF NOT EXISTS battlelog (game_ID INTEGER, action TEXT);")
+    c.execute("CREATE TABLE IF NOT EXISTS portfolio (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, stock_name TEXT")
+    # c.execute("CREATE TABLE IF NOT EXISTS gameChallenge (challenge_ID INTEGER PRIMARY KEY AUTOINCREMENT, challenger TEXT, challenged TEXT, accepted_status TEXT);")
+    # c.execute("CREATE TABLE IF NOT EXISTS gameHistory (game_ID INTEGER PRIMARY KEY, winner TEXT, loser TEXT);")
+    # c.execute("CREATE TABLE IF NOT EXISTS gameTracker (game_ID INTEGER, player1 TEXT, player2 TEXT, move1 TEXT, move2 TEXT, turn INTEGER);")
+    # c.execute("CREATE TABLE IF NOT EXISTS battlelog (game_ID INTEGER, action TEXT);")
 
     db.commit()
     db.close()
@@ -28,8 +28,13 @@ def addUser(username, password):
     db.commit()
     db.close()
 
+def addStock(username, stock):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    c.execute("INSERT INTO portfolio (username, stock_name)")
+
 # searches the users DB for the userID associated to the username parameter
-def getUserID(username):
+def checkUser(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     c.execute("SELECT user_id FROM users WHERE username = ?", (username,))
@@ -44,9 +49,8 @@ def getUserID(username):
 def updateLoginTime(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    userID = getUserID(username)
     current_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    c.execute("UPDATE users SET last_login = ? WHERE user_id = ?", (current_time, userID))
+    c.execute("UPDATE users SET last_login = ? WHERE username = ?", (current_time, username))
     db.commit()
     db.close()
 

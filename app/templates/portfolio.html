@@ -39,8 +39,14 @@
       </header>
       <!-- Main Content -->
       <main>
-         dood odod od odd odo
-         par
+        <div class="min-h-screen flex items-center justify-center bg-gray-800 p-8">
+           <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
+              <!-- Header -->
+              <h2 class="text-9xl text-gray-300 mt-10 mb-5 tracking-wider">
+                 {{user}} Portfolio
+              </h2>
+           </div>
+        </div>
       </main>
       <!-- Register  -->
       <div id="register" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
@@ -107,7 +113,7 @@
             {% if logged_in %}
 
             {% else %}
-            <h3 class="text-2xl bg-gray-400 font-bold mb-4">Log in first!</h3>
+            <h3 class="text-2xl font-bold mb-4">Log in first!</h3>
             {% endif %}
             <div class="flex justify-between items-center">
                <button type="button" onclick="toggleHidden('settings')" class="text-gray-400 hover:text-black">Cancel</button>

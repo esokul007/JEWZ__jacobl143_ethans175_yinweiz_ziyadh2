@@ -63,3 +63,6 @@ ethanS -- 2025-04-08 23:43
 ethanS -- 2025-04-08 23:48
 * Fixed indenting in html files
 * Forgot to fix CSS in account settings (fixed that)
+
+ethanS -- 2025-04-08 10:46
+* Added more styling

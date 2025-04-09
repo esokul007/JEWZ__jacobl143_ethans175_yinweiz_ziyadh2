@@ -35,7 +35,10 @@ def home():
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
     passValue = 'username' in session
-    return render_template("portfolio.html", logged_in=passValue)
+    if 'username' in session:
+        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s')
+    else:
+        return render_template("portfolio.html", logged_in=passValue)
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():
@@ -86,7 +89,7 @@ def register():
         if password != password2:
             flash("Passwords do not match", 'error')
             return redirect("/")
-        elif db.getUserID(username) >= 0:
+        elif db.checkUser(username) >= 0:
             flash("Username already exists", 'error')
             return redirect("/")
         else:
@@ -103,7 +106,7 @@ def login():
     else:
         username = request.form['username']
         password = request.form['password']
-        if db.getUserID(username) >= 0 and db.getTableData("users", "username", username)[2] == password:
+        if db.checkUser(username) >= 0 and db.getTableData("users", "username", username)[2] == password:
             session['username'] = username
             db.updateLoginTime(session['username'])
             flash("Logged in", 'success')
