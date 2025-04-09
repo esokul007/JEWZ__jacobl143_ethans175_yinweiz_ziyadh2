@@ -42,11 +42,31 @@
         <div class="min-h-screen flex items-center justify-center bg-gray-800 p-8">
            <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
               <!-- Header -->
+              {% if logged_in %}
               <h2 class="text-9xl text-gray-300 mt-10 mb-5 tracking-wider">
                  {{user}} Portfolio
               </h2>
+              <form action="/stock_register" method="POST" class="space-y-4">
+                 <div>
+                    <label for="stock" class="block text-sm font-medium text-gray-400">Stock Name</label>
+                    <input type="text" id="stock" name="stock" class="w-full px-3 py-2 bg-gray-300 text-black rounded" required>
+                 </div>
+                 <div class="flex justify-between items-center">
+                    <button type="submit" class="bg-gray-400 hover:bg-gray-600 text-white py-2 px-4 rounded">Enter</button>
+                 </div>
+              </form>
+              {% else %}
+              Log in to access Portfolio
+              {% endif %}
            </div>
         </div>
+
+        <div class="grid grid-cols-1 gap-6">
+           {% for stock in stockNames %}
+           <div class="bg-gray-600 h-60 shadow-md rounded-lg p-4 flex flex-col items-center justify-center">
+                {{ stock }}
+           </div>
+           {% endfor %}
       </main>
       <!-- Register  -->
       <div id="register" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">

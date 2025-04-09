@@ -8,7 +8,7 @@ def setup():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     c.execute("CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, created_at TEXT, last_login TEXT);")
-    c.execute("CREATE TABLE IF NOT EXISTS portfolio (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, stock_name TEXT")
+    c.execute("CREATE TABLE IF NOT EXISTS portfolio (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, stock_name TEXT);")
     # c.execute("CREATE TABLE IF NOT EXISTS gameChallenge (challenge_ID INTEGER PRIMARY KEY AUTOINCREMENT, challenger TEXT, challenged TEXT, accepted_status TEXT);")
     # c.execute("CREATE TABLE IF NOT EXISTS gameHistory (game_ID INTEGER PRIMARY KEY, winner TEXT, loser TEXT);")
     # c.execute("CREATE TABLE IF NOT EXISTS gameTracker (game_ID INTEGER, player1 TEXT, player2 TEXT, move1 TEXT, move2 TEXT, turn INTEGER);")
@@ -31,7 +31,7 @@ def addUser(username, password):
 def addStock(username, stock):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    c.execute("INSERT INTO portfolio (username, stock_name)")
+    c.execute("INSERT INTO portfolio (username, stock_name) VALUES (?, ?)", (username, stock))
 
 # searches the users DB for the userID associated to the username parameter
 def checkUser(username):

@@ -32,13 +32,19 @@ def home():
         return render_template("home.html", logged_in=passValue, username=session['username'], stockNames=stockNames)
     return render_template("home.html", logged_in=passValue)
 
+@app.route("/stock_register", methods=['GET', 'POST'])
+def stock_register():
+    db.addStock(session['username'], request.form.get('stock'))
+    return redirect("/portfolio")
+
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
     passValue = 'username' in session
+    stockNames = []
     if 'username' in session:
-        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s')
+        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', stockNames=stockNames)
     else:
-        return render_template("portfolio.html", logged_in=passValue)
+        return render_template("portfolio.html", logged_in=passValue, stockNames=stockNames)
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():
