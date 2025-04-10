@@ -39,7 +39,7 @@
       </header>
       <!-- Main Content -->
       <main>
-        <div class="min-h-screen flex items-center justify-center bg-gray-800 p-8">
+        <div class="mt-40 flex items-center justify-center bg-gray-800 p-8">
            <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
               <!-- Header -->
               {% if logged_in %}
@@ -61,12 +61,73 @@
            </div>
         </div>
 
-        <div class="grid grid-cols-2 gap-6">
-           {% for stock in portfolio %}
-           <div class="bg-gray-600 h-60 shadow-md rounded-lg p-4 flex flex-col items-center justify-center">
-                {{ stock }}
-           </div>
-           {% endfor %}
+
+
+
+<div class="mb-20 relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    No.
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Stock
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Company
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Sector
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Industry
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Current Price
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Market Cap
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    <span class="sr-only">Edit</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in portfolio %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Microsoft Surface Pro
+                </th>
+                <td class="px-6 py-4">
+                    {{stock}}
+                </td>
+                <td class="px-6 py-4">
+                    Laptop PC
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4">
+                    $1999
+                </td>
+                <td class="px-6 py-4 text-right">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
       </main>
       <!-- Register  -->
       <div id="register" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">

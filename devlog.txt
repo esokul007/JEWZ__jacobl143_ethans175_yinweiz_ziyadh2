@@ -64,10 +64,24 @@ ethanS -- 2025-04-08 23:48
 * Fixed indenting in html files
 * Forgot to fix CSS in account settings (fixed that)
 
-ethanS -- 2025-04-08 10:46
+ethanS -- 2025-04-09 10:46
 * Added more styling
 
-ethanS -- 2025-04-08 20:59
+ethanS -- 2025-04-09 20:59
 * You can add stocks now (not unique) to your portfolio
 * This doesn't regulate if the stock exists already so there should be a check later to see if you should be able to create your own index
 * Changed some styling and name referring
+
+DESIGN REVISIONS THUS FAR:
+------------------------------------
+Using more/bigger CSV files for more data implementation into our project
+Redesigned website structure for more logical routes and paths
+Adding a portfolio per user to allow them to collect Stocks
+Limiting stock ticker preview to S&P 500 Stocks
+====================================
+
+ethanS -- 2025-04-10 10:43
+* Added Design REVISIONS
+* Recoded portfolio css view
+* Need to implement data/edit option with portfolio viewport
+* Also needs more restrictions in terms of duplications
