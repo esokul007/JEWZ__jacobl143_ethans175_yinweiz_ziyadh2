@@ -66,3 +66,8 @@ ethanS -- 2025-04-08 23:48
 
 ethanS -- 2025-04-08 10:46
 * Added more styling
+
+ethanS -- 2025-04-08 20:59
+* You can add stocks now (not unique) to your portfolio
+* This doesn't regulate if the stock exists already so there should be a check later to see if you should be able to create your own index
+* Changed some styling and name referring

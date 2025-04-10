@@ -34,6 +34,8 @@ def home():
 
 @app.route("/stock_register", methods=['GET', 'POST'])
 def stock_register():
+    # print(session['username'])
+    # print(request.form.get('stock'))
     db.addStock(session['username'], request.form.get('stock'))
     return redirect("/portfolio")
 
@@ -42,7 +44,11 @@ def analysis():
     passValue = 'username' in session
     stockNames = []
     if 'username' in session:
-        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', stockNames=stockNames)
+        portfolio = []
+        port = db.getAllTableData("portfolio", "username", session['username'])
+        for item in port:
+            portfolio.append(item[2])
+        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', stockNames=stockNames, portfolio = portfolio)
     else:
         return render_template("portfolio.html", logged_in=passValue, stockNames=stockNames)
 

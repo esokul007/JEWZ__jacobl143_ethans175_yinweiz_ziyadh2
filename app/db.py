@@ -32,6 +32,8 @@ def addStock(username, stock):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
     c.execute("INSERT INTO portfolio (username, stock_name) VALUES (?, ?)", (username, stock))
+    db.commit()
+    db.close()
 
 # searches the users DB for the userID associated to the username parameter
 def checkUser(username):
