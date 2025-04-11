@@ -57,8 +57,9 @@ def update():
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
     loggedIn = 'username' in session
+    triggerView = False
+
     if loggedIn:
-        triggerView = False
         if request.form.get('trigger') == "True":
             triggerView = True
         else:
@@ -77,8 +78,11 @@ def analysis():
         marketCap = []
         editSwap = []
         port = db.getAllTableData("portfolio", "username", session['username'])
-        for item in port:
-            portfolio.append(item[2])
+        try:
+            for item in port:
+                portfolio.append(item[2])
+        except:
+            portfolio = ["None"]
         for count, item in enumerate(portfolio):
             numbers.append(count+1)
             data = companyData[companyData['Symbol'] == item]
@@ -101,7 +105,7 @@ def analysis():
                 dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count], editSwap[count]])
         return render_template("portfolio.html", logged_in=loggedIn, user=session['username']+'\'s', dataToPass=dataToPass, stockDates=stockDates, stockHigh=stockHigh, stock=stock, view=triggerView)
     else:
-        return render_template("portfolio.html", logged_in=loggedIn, stockDates=[], stockHigh = [], stock="")
+        return render_template("portfolio.html", logged_in=loggedIn, stockDates=[], stockHigh = [], stock="", view = triggerView)
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():
