@@ -45,10 +45,29 @@ def stock_register():
     else:
         return redirect("/")
 
+@app.route("/update_CompData", methods=['GET', 'POST'])
+def update():
+    loggedIn = 'username' in session
+    if loggedIn:
+
+        return redirect("/portfolio")
+    else:
+        return redirect("/")
+
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
     loggedIn = 'username' in session
     if loggedIn:
+        triggerView = False
+        if request.form.get('trigger') == "True":
+            triggerView = True
+        else:
+            triggerView = False
+
+        stock = request.form.get('stock')
+        stockDates = sp500Stocks[sp500Stocks['Name'] == stock]['date'].tolist()
+        stockHigh = sp500Stocks[sp500Stocks['Name'] == stock]['high'].tolist()
+
         portfolio = []
         numbers = []
         companies = []
@@ -80,9 +99,9 @@ def analysis():
             dataToPass = []
             for count, item in enumerate(numbers):
                 dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count], editSwap[count]])
-        return render_template("portfolio.html", logged_in=loggedIn, user=session['username']+'\'s', dataToPass=dataToPass)
+        return render_template("portfolio.html", logged_in=loggedIn, user=session['username']+'\'s', dataToPass=dataToPass, stockDates=stockDates, stockHigh=stockHigh, stock=stock, view=triggerView)
     else:
-        return render_template("portfolio.html", logged_in=loggedIn)
+        return render_template("portfolio.html", logged_in=loggedIn, stockDates=[], stockHigh = [], stock="")
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():

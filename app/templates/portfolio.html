@@ -116,9 +116,13 @@
                 </td>
                 <td class="px-6 py-4 text-right">
                   {% if line[7] %}
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit Stock</a>
+                    <button onclick="toggleHidden('edit')" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit Stock</button>
                     {% else %}
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Stock</a>
+                    <form action="/portfolio" method="POST" class="space-y-4">
+                      <input type="hidden" name="stock" value="{{line[1]}}">
+                      <input type="hidden" name="trigger" value="True">
+                      <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Stock</button>
+                    </form>
                     {% endif %}
                 </td>
             </tr>
@@ -126,9 +130,37 @@
         </tbody>
     </table>
 </div>
-
-
+  {% if view %}
+  <div class="text-gray-700 fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center">
+     <div class="bg-gray-300 p-6 rounded shadow-lg w-3/4 h-2/3">
+        <h3 class="text-gray-700 text-2xl font-bold mb-4">View Stocks</h3>
+        <div id="chart"></div>
+        <div class="flex justify-between items-center">
+           <form action="/portfolio" method="POST" class="space-y-4">
+              <input type="hidden" name="trigger" value="False">
+              <button type="submit" class="text-gray-600 hover:text-black">Cancel</button>
+           </form>
+        </div>
+     </div>
+  </div>
+  {% endif %}
       </main>
+
+
+      <!-- Edit Stock Info  -->
+      <div id="edit" class="fixed inset-0 bg-black bg-opacity-30 hidden flex items-center justify-center">
+         <div class="bg-gray-700 p-6 rounded shadow-lg w-1/2 h-1/2">
+            <h3 class="mt-10 text-5xl font-bold mb-4">Edit Stock Info</h3>
+            <form action="/edit" method="POST" class="space-y-4">
+
+              <div class="flex justify-between items-center">
+                 <button type="button" onclick="toggleHidden('edit')" class="text-gray-300 hover:text-black">Cancel</button>
+              </div>
+            </form>
+         </div>
+      </div>
+
+
       <!-- Register  -->
       <div id="register" class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center">
          <div class="bg-gray-700 p-6 rounded shadow-lg w-1/2 h-1/2">
@@ -205,6 +237,12 @@
       <footer class="fixed bottom-0 w-full bg-gray-800 p-4 text-center">
          <p class="text-gray-300 text-sm mb-5">&copy; 2025 Stocks. All rights reserved.</p>
       </footer>
+
+      <script>
+         var data1 = {{ stockDates | tojson}};
+         var data2 = {{ stockHigh | tojson}};
+         var stockName = "{{ stock }}";
+      </script>
       <script src="static/js/scripts.js"></script>
    </body>
 </html>
