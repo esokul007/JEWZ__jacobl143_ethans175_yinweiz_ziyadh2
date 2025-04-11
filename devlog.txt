@@ -85,3 +85,8 @@ ethanS -- 2025-04-10 10:43
 * Recoded portfolio css view
 * Need to implement data/edit option with portfolio viewport
 * Also needs more restrictions in terms of duplications
+
+ethanS -- 2025-04-10 21:54
+* Data from CSV successfully goes into table in portfolio
+* Goals for portfolio: Allow users to view/follow others' portfolios, create their own stored stocks with customizable data, view more stock info if exists
+ 
