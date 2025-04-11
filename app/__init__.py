@@ -19,32 +19,36 @@ app = Flask(__name__)
 app.secret_key = os.urandom(32)
 anchor = False
 
+sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
+index = pd.read_csv('csv/sp500_index.csv')
+companyData = pd.read_csv('csv/sp500_companies.csv')
+uniqueStocks = sp500Stocks['Name'].unique()
+indexDates = index['Date'].tolist()
+indexSP = index['S&P500'].tolist()
+
 if (not os.path.isfile("stock.db")):
     db.setup()
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-    stockNames = sp500Stocks['Name'].unique()
-    passValue = 'username' in session
-
-    if 'username' in session:
-        return render_template("home.html", logged_in=passValue, username=session['username'], stockNames=stockNames)
-    return render_template("home.html", logged_in=passValue)
+    loggedIn = 'username' in session
+    if loggedIn:
+        return render_template("home.html", logged_in=loggedIn, username=session['username'], stockNames=uniqueStocks)
+    return render_template("home.html", logged_in=loggedIn)
 
 @app.route("/stock_register", methods=['GET', 'POST'])
 def stock_register():
-    # print(session['username'])
-    # print(request.form.get('stock'))
-    db.addStock(session['username'], request.form.get('stock'))
-    return redirect("/portfolio")
+    loggedIn = 'username' in session
+    if loggedIn:
+        db.addStock(session['username'], request.form.get('stock'))
+        return redirect("/portfolio")
+    else:
+        return redirect("/")
 
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
-    companyData = pd.read_csv('csv/sp500_companies.csv')
-    passValue = 'username' in session
-    stockNames = []
-    if 'username' in session:
+    loggedIn = 'username' in session
+    if loggedIn:
         portfolio = []
         numbers = []
         companies = []
@@ -52,6 +56,7 @@ def analysis():
         industries = []
         currentPrice = []
         marketCap = []
+        editSwap = []
         port = db.getAllTableData("portfolio", "username", session['username'])
         for item in port:
             portfolio.append(item[2])
@@ -64,50 +69,45 @@ def analysis():
                 industries.append(data['Industry'].to_string().split("    ", 1)[1])
                 currentPrice.append(data['Currentprice'].to_string().split("    ", 1)[1])
                 marketCap.append(data['Marketcap'].to_string().split("    ", 1)[1])
+                editSwap.append(False)
             except:
                 companies.append("None")
                 sectors.append("None")
                 industries.append("None")
                 currentPrice.append("None")
                 marketCap.append("None")
+                editSwap.append(True)
             dataToPass = []
             for count, item in enumerate(numbers):
-                dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count]])
-        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', dataToPass=dataToPass)
+                dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count], editSwap[count]])
+        return render_template("portfolio.html", logged_in=loggedIn, user=session['username']+'\'s', dataToPass=dataToPass)
     else:
-        return render_template("portfolio.html", logged_in=passValue, stockNames=stockNames)
+        return render_template("portfolio.html", logged_in=loggedIn)
 
 @app.route("/battle", methods=['GET', 'POST'])
 def battle():
-    passValue = 'username' in session
-    return render_template("battle.html", logged_in=passValue)
+    loggedIn = 'username' in session
+    return render_template("battle.html", logged_in=loggedIn)
 
 @app.route("/stock_list", methods=['GET', 'POST'])
 def list():
-    global triggerView
+
     triggerView = False
     if request.form.get('trigger') == "True":
         triggerView = True
     else:
         triggerView = False
+
+    loggedIn = 'username' in session
+
     stockName = request.form.get('stock')
-
-    passValue = 'username' in session
-    index = pd.read_csv('csv/sp500_index.csv')
-
-    dates = index['Date'].tolist()
-    sp = index['S&P500'].tolist()
-    sp500Stocks = pd.read_csv('csv/all_stocks_5yr.csv')
-    names = sp500Stocks['Name'].unique()
-
     stockDates = sp500Stocks[sp500Stocks['Name'] == stockName]['date'].tolist()
     stockHighs = sp500Stocks[sp500Stocks['Name'] == stockName]['high'].tolist()
-    print(triggerView)
-    print(stockName)
+
     return render_template(
         "stock_list.html",
-        logged_in=passValue,
-        stockNames=names,
+        logged_in=loggedIn,
+        stockNames=uniqueStocks,
         stock = stockName,
         stockDates=stockDates,
         stockHigh=stockHighs,

@@ -53,6 +53,7 @@ grid: {
 },
 xaxis: {
   categories: data1,
+  tickAmount: 20,
 }
 };
 

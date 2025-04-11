@@ -37,7 +37,7 @@
       <!-- Main Content -->
       <main>
         <div class="mt-40 flex items-center justify-center bg-gray-800 p-8">
-           <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
+           <div class="shadow-2xl text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
               {% if logged_in %}
               <h2 class="text-9xl text-gray-300 mt-10 mb-5 tracking-wider">
                  {{user}} Portfolio
@@ -115,7 +115,11 @@
                     {{line[6]}}
                 </td>
                 <td class="px-6 py-4 text-right">
-                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                  {% if line[7] %}
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit Stock</a>
+                    {% else %}
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Stock</a>
+                    {% endif %}
                 </td>
             </tr>
             {% endfor %}
