@@ -41,14 +41,39 @@ def stock_register():
 
 @app.route("/portfolio", methods=['GET', 'POST'])
 def analysis():
+    companyData = pd.read_csv('csv/sp500_companies.csv')
     passValue = 'username' in session
     stockNames = []
     if 'username' in session:
         portfolio = []
+        numbers = []
+        companies = []
+        sectors = []
+        industries = []
+        currentPrice = []
+        marketCap = []
         port = db.getAllTableData("portfolio", "username", session['username'])
         for item in port:
             portfolio.append(item[2])
-        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', stockNames=stockNames, portfolio = portfolio)
+        for count, item in enumerate(portfolio):
+            numbers.append(count+1)
+            data = companyData[companyData['Symbol'] == item]
+            try:
+                companies.append(data['Longname'].to_string().split("    ", 1)[1])
+                sectors.append(data['Sector'].to_string().split("    ", 1)[1])
+                industries.append(data['Industry'].to_string().split("    ", 1)[1])
+                currentPrice.append(data['Currentprice'].to_string().split("    ", 1)[1])
+                marketCap.append(data['Marketcap'].to_string().split("    ", 1)[1])
+            except:
+                companies.append("None")
+                sectors.append("None")
+                industries.append("None")
+                currentPrice.append("None")
+                marketCap.append("None")
+            dataToPass = []
+            for count, item in enumerate(numbers):
+                dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count]])
+        return render_template("portfolio.html", logged_in=passValue, user=session['username']+'\'s', dataToPass=dataToPass)
     else:
         return render_template("portfolio.html", logged_in=passValue, stockNames=stockNames)
 

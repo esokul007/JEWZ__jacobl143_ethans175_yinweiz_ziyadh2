@@ -9,14 +9,11 @@
       <link rel="stylesheet" href="static/css/styles.css">
    </head>
    <body class="bg-gray-800 text-gray-300 min-h-screen flex flex-col">
-      <!-- Header -->
       <header class="bg-gray-900 p-6 shadow-md fixed top-0 w-full">
-         <!-- Header Section -->
          <div class="container mx-auto flex items-center justify-between">
             <!-- Left Aligned Logo -->
             <h1 class="text-3xl text-gray-300 font-bold"><a href="/">Tradesk</a></h1>
          </div>
-         <!-- Navigation Section -->
          <nav class="container mx-auto flex items-center justify-between mt-4">
             <!-- Left Aligned Navigation Links -->
             <div class="flex items-center space-x-5">
@@ -41,7 +38,6 @@
       <main>
         <div class="mt-40 flex items-center justify-center bg-gray-800 p-8">
            <div class="text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
-              <!-- Header -->
               {% if logged_in %}
               <h2 class="text-9xl text-gray-300 mt-10 mb-5 tracking-wider">
                  {{user}} Portfolio
@@ -95,28 +91,28 @@
             </tr>
         </thead>
         <tbody>
-            {% for stock in portfolio %}
+            {% for line in dataToPass %}
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
+                    {{line[0]}}
                 </th>
                 <td class="px-6 py-4">
-                    {{stock}}
+                    {{line[1]}}
                 </td>
                 <td class="px-6 py-4">
-                    Laptop PC
+                    {{line[2]}}
                 </td>
                 <td class="px-6 py-4">
-                    $1999
+                    {{line[3]}}
                 </td>
                 <td class="px-6 py-4">
-                    $1999
+                    {{line[4]}}
                 </td>
                 <td class="px-6 py-4">
-                    $1999
+                    {{line[5]}}
                 </td>
                 <td class="px-6 py-4">
-                    $1999
+                    {{line[6]}}
                 </td>
                 <td class="px-6 py-4 text-right">
                     <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
