@@ -40,6 +40,14 @@ def home():
 def stock_register():
     loggedIn = 'username' in session
     if loggedIn:
+        port = db.getAllTableData("portfolio", "username", session['username'])
+        portfolio = []
+        if port != -1:
+            for item in port:
+                portfolio.append(item[2])
+        if request.form.get('stock') in portfolio:
+            flash("This stock is already in your portfolio", "error")
+            return redirect("/portfolio")
         db.addStock(session['username'], request.form.get('stock'))
         return redirect("/portfolio")
     else:
@@ -78,11 +86,13 @@ def analysis():
         marketCap = []
         editSwap = []
         port = db.getAllTableData("portfolio", "username", session['username'])
+
         try:
             for item in port:
                 portfolio.append(item[2])
         except:
             portfolio = ["None"]
+
         for count, item in enumerate(portfolio):
             numbers.append(count+1)
             data = companyData[companyData['Symbol'] == item]
@@ -160,12 +170,28 @@ def register():
 
 @app.route('/explore', methods=['GET', 'POST'])
 def explore():
+    loggedIn = 'username' in session
     publicUsers = []
-    for item in db.getAllTableData("users", "Privacy", "Public"):
-        publicUsers.append(item[1])
+    portfolioList = []
+
+    users = db.getAllTableData("users", "Privacy", "Public")
+    if users != -1:
+        for user in users:
+            publicUsers.append(user[1])
     print(publicUsers)
 
-    return render_template("explore.html")
+    for user in publicUsers:
+        port = db.getAllTableData("portfolio", "username", user)
+        compile = []
+        try:
+            for item in port:
+                compile.append(item[2])
+        except:
+            compile = []
+        portfolioList.append(compile)
+
+    print(portfolioList)
+    return render_template("explore.html", publicUsers = publicUsers, logged_in = loggedIn)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

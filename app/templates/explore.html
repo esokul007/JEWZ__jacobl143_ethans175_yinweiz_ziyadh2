@@ -3,7 +3,7 @@
    <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Stocks</title>
+      <title>Tradesk</title>
       <script src="https://cdn.tailwindcss.com"></script>
       <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
       <link rel="stylesheet" href="static/css/styles.css">
@@ -41,6 +41,62 @@
            <div class="shadow-2xl text-3xl text-center max-w-7xl w-full bg-gray-700 p-4 rounded-lg shadow-2xl">
               View Public Portfolios Here!
            </div>
+        </div>
+        <div class="mb-20 relative overflow-x-auto shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            User
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Stock Count
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Followers
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            Following
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                          <span class="sr-only">  View Portfolio </span>
+                        </th>
+                        <th scope="col" class="px-6 py-3 text-center">
+                            <span class="sr-only">Follow</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in publicUsers %}
+                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+                        <th scope="row" class="text-center px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            {{user}}
+                        </th>
+                        <td class="px-6 py-4 text-center">
+                            None
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            None
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            None
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <form action="/explore_view" method="POST" >
+                              <input type="hidden" name="follow" value="True">
+                              <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">View Portfolio</button>
+                            </form>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <form action="/explore_follow" method="POST">
+                              <input type="hidden" name="follow" value="True">
+                              <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Follow Portfolio</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
       </main>
       <!-- Register  -->
@@ -90,7 +146,7 @@
       <!-- Flash messages -->
       {% with messages = get_flashed_messages(with_categories=true) %}
       {% if messages %}
-      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 sm:w-1/2">
+      <div class="absolute top-4 left-1/2 transform -translate-x-1/2 w-3/4 sm:w-1/2">
          {% for category, message in messages %}
          <div class="alert {{ category }} mb-4 p-4 rounded-lg shadow-lg opacity-100 transition-opacity duration-1000 animate-fade-out" id="flash-message">
             <p class="font-semibold text-lg">

@@ -97,4 +97,9 @@ ethanS -- 2025-04-11 10:10
 * Custom stocks editable by owner? Viewable and Editable, pre-existing is static perhaps
 
 ethanS -- 2025-04-12 11:52
-* Added another page for viewing portfolios 
+* Added another page for viewing portfolios (explore page)
+
+ethanS -- 2025-04-12 15:40
+* Fixed positioning of flash get_flashed_messages
+* Adding option to remove Stocks
+* Fixing logic that messes up in edge cases (new accounts / reset db)
