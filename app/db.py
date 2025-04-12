@@ -7,7 +7,7 @@ DB_FILE = "stock.db"
 def setup():
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
     c = db.cursor()
-    c.execute("CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, created_at TEXT, last_login TEXT);")
+    c.execute("CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT, privacy TEXT, created_at TEXT, last_login TEXT);")
     c.execute("CREATE TABLE IF NOT EXISTS portfolio (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, stock_name TEXT);")
     # c.execute("CREATE TABLE IF NOT EXISTS gameChallenge (challenge_ID INTEGER PRIMARY KEY AUTOINCREMENT, challenger TEXT, challenged TEXT, accepted_status TEXT);")
     # c.execute("CREATE TABLE IF NOT EXISTS gameHistory (game_ID INTEGER PRIMARY KEY, winner TEXT, loser TEXT);")
@@ -24,7 +24,7 @@ def addUser(username, password):
     # datetime formatting for sqlite text
     created_at = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # omits userID as an input as it autoincrements
-    c.execute("INSERT INTO users (username, password, created_at, last_login) VALUES (?, ?, ?, ?)", (username, password, created_at, created_at))
+    c.execute("INSERT INTO users (username, password, privacy, created_at, last_login) VALUES (?, ?, ?, ?, ?)", (username, password, "Public", created_at, created_at))
     db.commit()
     db.close()
 

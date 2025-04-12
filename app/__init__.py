@@ -158,6 +158,15 @@ def register():
             db.addUser(username, password)
             return redirect("/")
 
+@app.route('/explore', methods=['GET', 'POST'])
+def explore():
+    publicUsers = []
+    for item in db.getAllTableData("users", "Privacy", "Public"):
+        publicUsers.append(item[1])
+    print(publicUsers)
+
+    return render_template("explore.html")
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if not request.form:
