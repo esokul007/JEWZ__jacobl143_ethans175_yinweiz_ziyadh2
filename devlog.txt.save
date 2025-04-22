@@ -104,25 +104,7 @@ ethanS -- 2025-04-12 15:40
 * Adding option to remove Stocks
 * Fixing logic that messes up in edge cases (new accounts / reset db)
 
-FINAL REVISION
--------------------------
-PORTFOLIO WORK - Jacob problem
-Editing stocks (only by Owner of the stock): Add this to DB and allow it to be called by anyone to view (such that they are not the owner)
-Removing stocks on Portfolio
-
-EXPLORE PAGE WORK - ALL OF THIS TO DYZ
-Viewing Portfolios on Explore Page
-Following Portfolios on Explore Page
-Increment Followers/Following on Explore Page
-Amount of stocks in their portfolio
-View users if public - Ethan
-Search bar to find portfolios
-Filtering based on the followers/following/stock counts
-
-S&P 500 STOCK DATA WORK
-Clean up the Edit Chart JS - Ziyad
-
-Think up some Account Settings that we can Set
-public vs private settings - Ethan
-think up some other settings - Ethan
-=============================
+FINAL PLANS
+-----------------------------
+Editing stocks? on Portfolio Page (update db
+==========================
