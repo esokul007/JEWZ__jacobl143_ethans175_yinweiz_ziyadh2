@@ -35,6 +35,13 @@ def addStock(username, stock):
     db.commit()
     db.close()
 
+def removeStock(username, stock):
+    db = sqlite3.connect(DB_FILE, check_same_thread=False)
+    c = db.cursor()
+    c.execute("DELETE FROM portfolio WHERE username = ? AND stock_name = ?", (username, stock))
+    db.commit()
+    db.close()
+
 # searches the users DB for the userID associated to the username parameter
 def checkUser(username):
     db = sqlite3.connect(DB_FILE, check_same_thread=False)
