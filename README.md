@@ -40,5 +40,5 @@ cd PATH/TO/JEWZ__jacobl143_ethans175_yinweiz_ziyadh2```
 pip install -r requirements.txt
 ```
 ## Launch Codes:
-3. Open firefox and go to the given link
-```OUR IP (to be added)```
+1. To run locally, launch wsgi.py (python3 wsgi.py) located in the app directory
+2. To run on the IOT, open firefox and click ```glukose.tech```
