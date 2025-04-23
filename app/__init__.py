@@ -72,8 +72,8 @@ def analysis():
             triggerView = True
         else:
             triggerView = False
-
         stock = request.form.get('stock')
+
         stockDates = sp500Stocks[sp500Stocks['Name'] == stock]['date'].tolist()
         stockHigh = sp500Stocks[sp500Stocks['Name'] == stock]['high'].tolist()
 
@@ -113,6 +113,10 @@ def analysis():
             dataToPass = []
             for count, item in enumerate(numbers):
                 dataToPass.append([item, portfolio[count], companies[count], sectors[count], industries[count], currentPrice[count], marketCap[count], editSwap[count]])
+        if request.form.get('rmv') == "True":
+            for item in dataToPass:
+                if (item[1] == stock):
+                    dataToPass.remove(item)
         return render_template("portfolio.html", logged_in=loggedIn, user=session['username']+'\'s', dataToPass=dataToPass, stockDates=stockDates, stockHigh=stockHigh, stock=stock, view=triggerView)
     else:
         return render_template("portfolio.html", logged_in=loggedIn, stockDates=[], stockHigh = [], stock="", view = triggerView)

@@ -129,8 +129,9 @@
                     {% endif %}
                 </td>
                 <td class="px-6 py-4 text-center">
-                    <form action="/remove" method="POST">
+                    <form action="/portfolio" method="POST">
                       <input type="hidden" name="stock" value="{{line[1]}}">
+                      <input type="hidden" name="rmv" value="True">
                       <button type="submit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remove</button>
                     </form>
                 </td>
