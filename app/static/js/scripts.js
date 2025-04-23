@@ -74,35 +74,35 @@ annotations: {
 
 };
 
-var chart = new ApexCharts(document.querySelector("#chart"), options);
-chart.render();
+// var chart = new ApexCharts(document.querySelector("#chart"), options);
+// chart.render();
 
-// Update Title
-document.getElementById("update-title").addEventListener("click", function() {
-const newTitle = document.getElementById("chart-title").value;
-if (newTitle) {
-  chart.updateOptions({
-      title: {
-          text: newTitle
-      }
-  });
-  console.log("I ran!")
-}
-});
+// // Update Title
+// document.getElementById("update-title").addEventListener("click", function() {
+// const newTitle = document.getElementById("chart-title").value;
+// if (newTitle) {
+//   chart.updateOptions({
+//       title: {
+//           text: newTitle
+//       }
+//   });
+//   console.log("I ran!")
+// }
+// });
 
-// Update Data
-document.getElementById("update-data").addEventListener("click", function() {
-const newData = document.getElementById("new-data").value;
-try {
-  const newDataArray = JSON.parse(newData);
-  chart.updateSeries([{
-      name: "Updated Data",
-      data: newDataArray
-  }]);
-} catch (e) {
-  console.error("Invalid data format. Enter data as an array, e.g., [10, 20, 30].");
-}
-});
+// // Update Data
+// document.getElementById("update-data").addEventListener("click", function() {
+// const newData = document.getElementById("new-data").value;
+// try {
+//   const newDataArray = JSON.parse(newData);
+//   chart.updateSeries([{
+//       name: "Updated Data",
+//       data: newDataArray
+//   }]);
+// } catch (e) {
+//   console.error("Invalid data format. Enter data as an array, e.g., [10, 20, 30].");
+// }
+// });
 
 // Add Annotation
 document.addEventListener("DOMContentLoaded", function () {
