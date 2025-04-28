@@ -6,3 +6,5 @@ Task 6: If a QR code is on screen and you want to receive the information, file,
 Task 9: One of the most basic ciphers is the caesar cipher which shifts all the alphabetic characters of a string, the same amount of letters. If given that some text has been changed by a caesar cipher, you can rotate each letter in that string by x letters in the alphabet until the frequency of those letters in the string, best matches letter frequency in english.
 
 Task 10: If one wanted to hide information or make comments in an html file, they could hide the text in a paragraph, but set the style="display:none" so that it is not seen on the site itself.
+
+Task 17: Similarly to task 6, a QR code can be scanned and take you to a link to some sort of audio file where such as in this example.
